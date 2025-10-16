@@ -45,6 +45,7 @@ Proceed through the SAM file read-by-read
 Check the stored data:
 If this is the first instance of these, write this out to the file and keep these for referencing the next reads.
 If this is not the first instance of these (all match what was previously stored), keep what was previously stored and don't write this out to the file.
+If the position moves forward/is not the same, clear the stored data. (I fear this does not accomodate for 5' position and I'm unsure how to handle it.)
 
 ## High Level Functions
 For each function, be sure to include:
