@@ -8,20 +8,14 @@ def get_args():
     parser = argparse.ArgumentParser(description="This will remove PCR duplicates from a sorted sam file. As a reminder, this will only keep the first instance of the duplicate and remove all others.")
     parser.add_argument("-f", "--file", help="absolute input file path to sorted sam file", type = str, required = True)
     parser.add_argument("-o", "--outfile", help="for the output path to the new dediplicated sam file", type = str, required = True)
-    parser.add_argument("-u", "--umi", help="absolute input file path to umi file", type = str, required = True)
+    parser.add_argument("-u", "--umi", help="Absolute input file path to umi file. UMI file must only contain one unique UMI per line in the file.", type = str, required = True)
     return parser.parse_args()
 
+#input files and output file specified by the user
 args = get_args()
 in_sam: str = args.file
 out_file: str = args.outfile
 umi_file: str = args.umi
-
-#code must be able to run as ./schacht_deduper.py -u STL96.txt -f <in.sam> -o <out.sam>
-
-#comment out test files when ready
-# umi_file:str = "STL96.txt" 
-# in_sam:str = "test.sam"
-# out_file = "test_output.sam"
 
 umi_set:set = set() #initializes empty UMI set
 
@@ -65,7 +59,7 @@ with open(in_sam, "r") as sam, open(out_file, 'w') as o_file:
     for num, line in enumerate(sam):
         # line = sam.readline().strip()
         line = line.strip()
-        if line.startswith("@"): #print the header lines that start with "@"
+        if line.startswith("@"): #write out the header lines that start with "@"
             o_file.write(line)
             o_file.write('\n')
         else: #for the lines with reads
@@ -105,7 +99,6 @@ with open(in_sam, "r") as sam, open(out_file, 'w') as o_file:
             else: #wrong umi
                 wrong_UMI_count +=1 #increment wrong umi counter
 
-    # print(read_tuple)
 
 print(f'Number of unique reads: {unique_count}')
 print(f'Number of duplicate reads: {duplicate_count}')
