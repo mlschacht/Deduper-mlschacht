@@ -19,7 +19,7 @@ Below are options that are required:
 ## Resources in this Repository
 The general algorithm designed for this script is described in the pseudocode.md. The algorithm performs in a way that does not load the entire SAM file into memory to be more memory efficient.
 
-The script that performs the deduplication is called schacht_deduper.py. The shell script with commands to run each of the test files is called "sort_then_dedup.sh".
+The script that performs the deduplication is called schacht_deduper.py. The shell script with commands to run each of the test files is called "test_dedup.sh".
 
 ## Dependencies
 - Python 3.12 compatible code
