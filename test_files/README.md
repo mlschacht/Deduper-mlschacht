@@ -2,7 +2,7 @@
 
 In the test_files directory, there are 4 different test files with their expected outputs that can be used to test different test cases. Below is a list of each test file and the cases they cover.
 
-All test files are intended to be tested with the UMI text file in the main repo directory called "STL96.txt".
+All test files are intended to be tested with the UMI text file in the main repo directory called "test_UMI.txt".
 
 ## different_length_dups.sam -> different_length_dups_output.sam
 - includes 2 reads, which are duplicates but have different UMIs

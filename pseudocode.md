@@ -82,6 +82,76 @@ def fivePrimeFinder(pos:int, cigar:str, strand:bool) ->  int:
     Input10: 110, 36M12071N29M5S, False
     Output10:12,251 
 
+    Final Test Examples:
+    print("A")
+print(VPrimeFinder(110, "15M", "+"))
+print(110)
+print("B")
+print(VPrimeFinder(110, "15M", "-"))
+print(125)
+print("C")
+print(VPrimeFinder(110, "10S20M", "+"))
+print(100)
+print("D")
+print(VPrimeFinder(110, "10S20M", "-"))
+print(130)
+print("E")
+print(VPrimeFinder(110, "10S20M5S", "+"))
+print(100)
+print("F")
+print(VPrimeFinder(110, "10S20M5S", "-"))
+print(135)
+print("G")
+print(VPrimeFinder(110, "23M1290N25M2D18M", "+"))
+print(110)
+print("H")
+print(VPrimeFinder(110, "23M1290N25M2D18M", "-"))
+print(1468)
+print("I")
+print(VPrimeFinder(110, "23M1290I25M2D18M", "-"))
+print(178)
+print("J")
+print(VPrimeFinder(110, "36M12071N29M1S", "+"))
+print(110)
+print("K")
+print(VPrimeFinder(110, "36M12071N29M5S", "-"))
+print(12251)
+
+Expected output:
+A
+110
+110
+B
+125
+125
+C
+100
+100
+D
+130
+130
+E
+100
+100
+F
+135
+135
+G
+110
+110
+H
+1468
+1468
+I
+178
+178
+J
+110
+110
+K
+12251
+12251
+
 #overall, the pos strand only changes with an S on the start and it shouldnt be possible to start with an I
 #overall for the neg strand, add all except if there is an S at the front
 #if there is an I do not add that value
@@ -96,3 +166,15 @@ def getUMI(qname:str) ->  str:
     Input1: NS500451:154:HWKTMBGXX:1:11101:22955:1351:ATCGAACC
     Output1: ATCGAACC
 '''
+
+
+#have we seen this read before?
+if read_tuple not in unique_set: #No! We found a unique read!
+    #remove all tuples with 5' positions that are 50bp before the curren 5' pos
+    ####Future note, we may be able to avoid doing this every time. Is this time consuming???
+    ######### we can keep track of the "current position" by updating each time 5'pos > current pos and initialize current pos to 0
+    ################# THIS CAN ONLY BE UPDATED IF WE ARE LOOKING AT POSITIVE READS!!!
+    unique_set = set([i for i in unique_set if i[0] > VPrime-soft_clipping_max])
+
+    #add tuple to set
+    unique_set.add(read_tuple)
