@@ -8,21 +8,25 @@ A PCR duplicate is defined in this script as a read that contains the same Uniqu
 
 ## How to Run:
 An example of how to run the script:
+
 ```schacht_deduper.py -u umi_file.txt -f sorted_sam_file.sam -o deduplicated_sam.sam```
 
 Below are options that are required:
-    - ```-f```, ```--file```: designates absolute file path to sorted sam file
-    - ```-o```, ```--outfile```: designates absolute file path to deduplicated sam file
-    - ```-u```, ```--umi```: designates file containing the list of UMIs
-    - ```-h```, ```--help```: prints a help message
+- -f, --file: designates absolute file path to sorted sam file
+- -o, --outfile: designates absolute file path to deduplicated sam file
+- -u, --umi: designates file containing the list of UMIs
+- -h, --help: prints a help message
 
 ## Resources in this Repository
-The general algorithm designed for this script is described in the pseudocode.md. The algorithm performs in a way that does not load the entire SAM file into memory to be more memory efficient.
+The script that performs the deduplication is called **schacht_deduper.py**. 
 
-The script that performs the deduplication is called schacht_deduper.py. The shell script with commands to run each of the test files is called "test_dedup.sh".
+The shell script with commands to run each of the test files is called **test_dedup.sh**.
 
-## Dependencies
-- Python 3.12 compatible code
-- A sorted sam file is needed for this script. Therefore, samtools is needed to sort each sam file before deduplicating if sorting has not occured. This script does not include sorting the file. This needs to be done beforehand.
+The general algorithm designed for this script is described in the **pseudocode.md**. The algorithm performs in a way that does not load the entire SAM file into memory to be more memory efficient.
+
+## Requirements
+- **Python 3.12** compatible code
+- **A sorted sam file** is needed for this script. Therefore, **samtools** is needed to sort each sam file before deduplicating if sorting has not occured. This script does not include sorting the file. This needs to be done beforehand.
+- A **text file with UMIs** expected from the sam file is needed as well. This needs to be a text file with each unique UMI on its own separate line (not a CSV or tab-separated).
 
 
